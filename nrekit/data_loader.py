@@ -275,13 +275,13 @@ class json_file_data_loader(file_data_loader):
             print("Building word vector matrix and mapping...")
             self.word_vec_mat = np.zeros((self.word_vec_tot, self.word_vec_dim), dtype=np.float32) # 初始化词向量，为0，(word_vec_tot, word_vec_dim)
 
-
+            # 枚举，index and dict
             for cur_id, word in enumerate(self.ori_word_vec):
                 w = word['word']
                 if not case_sensitive:
                     w = w.lower()
                 self.word2id[w] = cur_id # 将词对应于index的id
-                self.word_vec_mat[cur_id, :] = word['vec'] 
+                self.word_vec_mat[cur_id, :] = word['vec'] #完全由词向量组成2维数组,word--id--index
 
             # 将上文对应初始化的词向量更新为vec字典的向量, UNK和BLANK并没有为其赋值词向量
 
@@ -296,9 +296,11 @@ class json_file_data_loader(file_data_loader):
             self.entpair2scope = {} # (head, tail) -> scope
             self.relfact2scope = {} # (head, tail, relation) -> scope
             self.id2entity = {} # id和entity的一一对应
+            #参数的意义
             self.data_word = np.zeros((self.instance_tot, self.max_length), dtype=np.int32)
             self.data_pos1 = np.zeros((self.instance_tot, self.max_length), dtype=np.int32) 
             self.data_pos2 = np.zeros((self.instance_tot, self.max_length), dtype=np.int32)
+            # 数组，每个句子对应的关系id
             self.data_rel = np.zeros((self.instance_tot), dtype=np.int32)
             self.data_mask = np.zeros((self.instance_tot, self.max_length), dtype=np.int32)
             self.data_length = np.zeros((self.instance_tot), dtype=np.int32)
@@ -319,6 +321,7 @@ class json_file_data_loader(file_data_loader):
                 
                 head = ins['head']['word']
                 tail = ins['tail']['word']
+                # 当前实体id对
                 cur_entpair = ins['head']['id'] + '#' + ins['tail']['id'] # 拼接了头和尾的数据
                 cur_relfact = ins['head']['id'] + '#' + ins['tail']['id'] + '#' + ins['relation'] # 拼接了头尾还有关系的数据
 
@@ -348,6 +351,7 @@ class json_file_data_loader(file_data_loader):
                 cur_ref_data_word = self.data_word[i]         
 
                 # pos1为head的开头词在句子中的索引位置，pos2为tail的起始词在句子中的索引位置
+                # 为单个字映射关系
                 for j in range(min(max_length, len(sentence))):
                     word = sentence[j]
                     if word in self.word2id:
@@ -372,7 +376,7 @@ class json_file_data_loader(file_data_loader):
                 if pos2 >= max_length:
                     pos2 = max_length - 1
                 
-                
+                #todo
                 pos_min = min(pos1, pos2)
                 pos_max = max(pos1, pos2)
                 for j in range(max_length):
@@ -400,7 +404,7 @@ class json_file_data_loader(file_data_loader):
 
             print("Finish pre-processing")     
             print("Storing processed files...")
-
+            # 按'/' 和'.' 分割
             name_prefix = '.'.join(file_name.split(os.sep)[-1].split('.')[:-1])
             word_vec_name_prefix = '.'.join(word_vec_file_name.split(os.sep)[-1].split('.')[:-1])
             processed_data_dir = '_processed_data'
@@ -472,6 +476,8 @@ class json_file_data_loader(file_data_loader):
     def __next__(self):
         return self.next_batch(self.batch_size)
 
+
+    # 批处理尺寸
     def next_batch(self, batch_size): # TODO read
         if self.idx >= len(self.order):
             self.idx = 0

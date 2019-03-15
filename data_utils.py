@@ -58,6 +58,7 @@ def txt2json_data(readfile, writefile):
         headword, tailword, relation, sentence = splitdata[0], splitdata[1], splitdata[2], splitdata[3:]
 
         if len(write_data) > 0:
+            # 验证是否存在重复字段
             for item in write_data:
                 if item["head"] and item["head"]["word"] == headword:
                     temp_dict["head"] = item["head"]

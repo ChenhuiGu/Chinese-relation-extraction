@@ -127,7 +127,7 @@ class re_framework:
         assert(self.train_data_loader.batch_size % gpu_nums == 0)
         print("Start training...")
         
-        # Init
+        # Init，配置，创建会话，优化器的学习率
         config = tf.ConfigProto(allow_soft_placement=True)
         self.sess = tf.Session(config=config)
         optimizer = optimizer(learning_rate)
