@@ -242,8 +242,21 @@ class json_file_data_loader(file_data_loader):
             self.ori_data = json.load(codecs.open(self.file_name, "r", "utf-8"))
             print("Finish loading")
             print("Loading word vector file...")
-            self.ori_word_vec = json.load(
-                codecs.open(self.word_vec_file_name, "r", "utf-8"))
+
+            f = codecs.open(self.word_vec_file_name, "r", "utf-8")
+            write_data = []
+            lines = f.readlines()
+            for line in lines[1:]:
+                temp_dict = {}
+                splitdata = line.strip().split()
+
+                word, vec = splitdata[0], splitdata[1:]
+
+                temp_dict["word"] = word
+                temp_dict["vec"] = vec
+
+                write_data.append(temp_dict)
+            self.ori_word_vec  = write_data
             print("Finish loading")
             
             # Eliminate case sensitive

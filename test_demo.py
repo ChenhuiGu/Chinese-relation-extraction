@@ -7,15 +7,17 @@ import json
 import codecs
 
 
-dataset_name = 'nyt'
+dataset_name = 'cndata'
 if len(sys.argv) > 1:
     dataset_name = sys.argv[1]
 dataset_dir = os.path.join('./data', dataset_name)
 if not os.path.isdir(dataset_dir):
     raise Exception("[ERROR] Dataset dir %s doesn't exist!" % (dataset_dir))
 
+
 # The first 3 parameters are train / test data file name, word embedding file name and relation-id mapping file name respectively.
-test_loader = nrekit.data_loader.json_file_data_loader(os.path.join(dataset_dir, 'test.json'), 
+# todo 修改vec库名称
+test_loader = nrekit.data_loader.json_file_data_loader(os.path.join(dataset_dir, 'test.json'),
                                                        os.path.join(dataset_dir, 'word_vec.json'),
                                                        os.path.join(dataset_dir, 'rel2id.json'), 
                                                        mode=nrekit.data_loader.json_file_data_loader.MODE_ENTPAIR_BAG,
