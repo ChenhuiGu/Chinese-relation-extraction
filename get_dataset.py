@@ -34,7 +34,7 @@ def lexer(filename):
 
     '''
     write_data = []
-    f1 = open('test.txt','w')
+    f1 = open('test.json','w')
     exclude_word = ['会','局','院','部','委','所']
     exit_entity = []
     with open(filename) as f:
