@@ -40,7 +40,11 @@ def txt2json_vec(readfile, writefile, fromline):
     f.close()
     f2.close()
 
+'''
+从3000篇财报中，根据关键字(客户、股票)抽取实体和关系，作为训练集
+1.
 
+'''
 def txt2json_data(readfile, writefile):
     f = codecs.open(readfile, 'r', 'utf-8')
     f2 = codecs.open(writefile, 'w', 'utf-8')
