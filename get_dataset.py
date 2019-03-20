@@ -4,6 +4,7 @@ from uuid import uuid1
 from baidu_config import bd_client
 import re
 import os
+import Config
 
 
 def get_file_path_list(root):
@@ -87,28 +88,27 @@ def get_train_data():
     write_data = []
     key_words = {
         '持有股票': ['股票', '股东', '股权投资', '控股', '持有'],
-        # '合作': ['联合', '合作', '携手', '伙伴'],
-        # '关联': ['关联'],
-        # '担保': ['担保'],
-        # '供应商': ['供应', '供货', '提供', '竞标'],
-        # '客户': ['客户', '中标', '销售', '供应', '供货', '提供'],
-        # '子公司': ['子公司', '收购', '被收购'],
-        # '法律纠纷': ['法律纠纷', '中标'],
-        # '竞争对手': ['竞争对手'],
+        '合作': ['联合', '合作', '携手', '伙伴'],
+        '关联': ['关联'],
+        '担保': ['担保'],
+        '供应商': ['供应', '供货', '提供', '竞标'],
+        '客户': ['客户', '中标', '销售', '供应', '供货', '提供'],
+        '子公司': ['子公司', '收购', '被收购'],
+        '法律纠纷': ['法律纠纷', '中标'],
+        '竞争对手': ['竞争对手'],
     }
-    # files = get_file_path_list()
-    # for file in files:
-    file = '/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/康佳集团股份有限公司.txt'
-    tailword = file.split('/')[-1][:-4]
-    with open(file) as f:
-        content = f.read()
-    for relate in list(key_words.keys()):
-        for key_word in key_words[relate]:
-            print(key_word)
-            write_data.extend(search_keyword(key_word, content, tailword, relate))
-
-    with open('test2.txt', 'w') as f1:
-        f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
+    files = get_file_path_list(Config.TRAIN_DATA)
+    for file in files:
+        tailword = file.split('/')[-1][:-4]
+        with open(file) as f:
+            content = f.read()
+        for relate in list(key_words.keys()):
+            for key_word in key_words[relate]:
+                print(key_word)
+                write_data.extend(search_keyword(key_word, content, tailword, relate))
+        write_file = Config.CN_DATA + tailword + '.json'
+        with open(write_file, 'w') as f1:
+            f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
 
 
 def get_define_entity(filename):
@@ -227,4 +227,4 @@ def baidu_segmentation(query):
 if __name__ == '__main__':
     # get_define_entity('/Users/chenhuigu/Documents/GitHub/relat_extra/origindata/Zte_notice.txt')
     # t = get_file_path_list('/Users/chenhuigu/Documents/GitHub/relat_extra/origindata')
-    print(get_train_data())
+    get_train_data()
