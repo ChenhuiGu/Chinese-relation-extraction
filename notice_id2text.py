@@ -42,13 +42,14 @@ def get_define_entity():
     exclude_word = ['会', '局', '院', '部', '委', '所', '盟', '国']
     with open('company_list.csv') as f0:
         companys = f0.readlines()
-    f1 = open('train_data.csv','a')
+
     for company in companys[1:]:
+        f1 = open('train_data.csv', 'a')
         try:
             name,code,id = tuple(company.strip().split(','))
             filepath = id2filepath(id)
-            with open(filepath) as f2:
-                lines = f2.readlines()
+            f2 = open(filepath)
+            lines = f2.readlines()
             for line in lines:
                 if '第二节  公司简介和主要财务指标' in line:
                     break
@@ -61,10 +62,12 @@ def get_define_entity():
                         if entitie[-1] not in exclude_word:
                             # sentences = re.findall(r'.{50}%s.{50}' % entitie, content)
                             f1.write('%s,%s\n'%(name,entitie))
+                f2.close()
                 time.sleep(0.3)
+            f1.close()
         except Exception:
             print('%s is error'%name)
-    f1.close()
+
 
 
 
