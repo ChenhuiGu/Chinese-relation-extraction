@@ -99,16 +99,21 @@ def get_train_data():
     }
     files = get_file_path_list(Config.TRAIN_DATA)
     for file in files:
-        tailword = file.split('/')[-1][:-4]
-        with open(file) as f:
-            content = f.read()
-        for relate in list(key_words.keys()):
-            for key_word in key_words[relate]:
-                print(key_word)
-                write_data.extend(search_keyword(key_word, content, tailword, relate))
-        write_file = Config.CN_DATA + tailword + '.json'
-        with open(write_file, 'w') as f1:
-            f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
+        # 读写文件错误
+        try:
+            tailword = file.split('/')[-1][:-4]
+            with open(file) as f:
+                content = f.read()
+            for relate in list(key_words.keys()):
+                for key_word in key_words[relate]:
+                    print(key_word)
+                    write_data.extend(search_keyword(key_word, content, tailword, relate))
+            # todo 重复写入数据
+            write_file = Config.CN_DATA + tailword + '.json'
+            with open(write_file, 'w') as f1:
+                f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
+        except Exception:
+            print('%s is break'%file)
 
 
 def get_define_entity(filename):
