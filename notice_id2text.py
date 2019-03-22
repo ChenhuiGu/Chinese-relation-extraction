@@ -60,7 +60,7 @@ def get_define_entity():
                         print(entitie)
                         if entitie[-1] not in exclude_word:
                             # sentences = re.findall(r'.{50}%s.{50}' % entitie, content)
-                            f1.write('%s,%s'%(name,entitie))
+                            f1.write('%s,%s\n'%(name,entitie))
                 time.sleep(0.3)
         except Exception:
             print('%s is error'%name)
