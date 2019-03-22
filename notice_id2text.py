@@ -6,6 +6,8 @@
 import json
 import os
 import re
+import time
+
 from baidu_config import bd_client
 # base_dir = os.path.split(os.path.realpath(__file__))[0]
 from uuid import uuid1
@@ -42,22 +44,26 @@ def get_define_entity():
         companys = f0.readlines()
     f1 = open('train_data.csv','a')
     for company in companys[1:]:
-        name,code,id = tuple(company.strip().split(','))
-        filepath = id2filepath(id)
-        with open(filepath) as f2:
-            lines = f2.readlines()
-        for line in lines:
-            if '第二节  公司简介和主要财务指标' in line:
-                break
-            line = line.lstrip().rstrip()
-            if line:
-                entities = baidu_segmentation(line)
-                if entities:
-                    entitie = entities[0]
-                    print(entitie)
-                    if entitie[-1] not in exclude_word:
-                        # sentences = re.findall(r'.{50}%s.{50}' % entitie, content)
-                        f1.write('%s,%s'%(name,entitie))
+        try:
+            name,code,id = tuple(company.strip().split(','))
+            filepath = id2filepath(id)
+            with open(filepath) as f2:
+                lines = f2.readlines()
+            for line in lines:
+                if '第二节  公司简介和主要财务指标' in line:
+                    break
+                line = line.lstrip().rstrip()
+                if line:
+                    entities = baidu_segmentation(line)
+                    if entities:
+                        entitie = entities[0]
+                        print(entitie)
+                        if entitie[-1] not in exclude_word:
+                            # sentences = re.findall(r'.{50}%s.{50}' % entitie, content)
+                            f1.write('%s,%s'%(name,entitie))
+                time.sleep(0.3)
+        except Exception:
+            print('%s is error'%name)
     f1.close()
 
 
