@@ -21,10 +21,10 @@ def id2filepath(id):
     '''
     base_dir = '/data01/guchh/df-copy'
     id = int(id)
-    if id < 300000 or 700000 <= id < 1300000:
+    if 700000 <= id < 1300000:
         dir = str(id % 60)
         dirpath = os.path.join(base_dir, dir)
-    elif id>1891489:
+    elif id>1891489 or id < 300000:
         dir = str(id % 200)
         dirpath = os.path.join(base_dir, dir)
     else:
