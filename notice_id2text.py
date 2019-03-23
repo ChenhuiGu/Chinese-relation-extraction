@@ -1,8 +1,3 @@
-'''
-1。根据id得到公告文本
-2。参数:id
-3.分界点：1891498
-'''
 import json
 import os
 import re
@@ -11,7 +6,6 @@ import time
 from baidu_config import bd_client
 # base_dir = os.path.split(os.path.realpath(__file__))[0]
 from uuid import uuid1
-
 
 
 def id2filepath(id):
@@ -24,13 +18,13 @@ def id2filepath(id):
     if 700000 <= id < 1300000:
         dir = str(id % 60)
         dirpath = os.path.join(base_dir, dir)
-    elif id>1891489 or id < 300000:
+    elif id > 1891489 or id < 300000:
         dir = str(id % 200)
         dirpath = os.path.join(base_dir, dir)
     else:
         dir = str(id % 70)
         dirpath = os.path.join(base_dir, dir)
-    filepath = dirpath + '/%d.txt'%id
+    filepath = dirpath + '/%d.txt' % id
     return filepath
 
 
@@ -46,11 +40,15 @@ def get_define_entity():
     for company in companys[1:]:
         f1 = open('train_data.csv', 'a')
         try:
-            name,code,id = tuple(company.strip().split(','))
+            name, code, id = tuple(company.strip().split(','))
             filepath = id2filepath(id)
             f2 = open(filepath)
             lines = f2.readlines()
+            count = 0
             for line in lines:
+                # 限制循环次数
+                if count > 30:
+                    break
                 if '第二节  公司简介和主要财务指标' in line:
                     break
                 line = line.lstrip().rstrip()
@@ -61,14 +59,13 @@ def get_define_entity():
                         print(entitie)
                         if entitie[-1] not in exclude_word:
                             # sentences = re.findall(r'.{50}%s.{50}' % entitie, content)
-                            f1.write('%s,%s\n'%(name,entitie))
+                            f1.write('%s,%s\n' % (name, entitie))
                 f2.close()
                 time.sleep(0.3)
+                count += 1
             f1.close()
         except Exception:
-            print('%s is error'%name)
-
-
+            print('%s is error' % name)
 
 
 def baidu_segmentation(query):
@@ -87,6 +84,7 @@ def baidu_segmentation(query):
         if item['ne'] == 'ORG':
             entities.append(item['item'])
     return entities
+
 
 if __name__ == '__main__':
     get_define_entity()
