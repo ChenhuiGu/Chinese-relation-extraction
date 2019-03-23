@@ -18,7 +18,7 @@ def id2filepath(id):
     if 700000 <= id < 1300000:
         dir = str(id % 60)
         dirpath = os.path.join(base_dir, dir)
-    elif id > 1891489 or id < 300000:
+    elif id > 1891489 or id < 700000:
         dir = str(id % 200)
         dirpath = os.path.join(base_dir, dir)
     else:
