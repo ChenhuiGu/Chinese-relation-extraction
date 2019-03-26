@@ -96,7 +96,7 @@ def read_notice():
 
 
         write_data.append(temp_dict)
-
+        print(tailword)
     f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
     f.close()
 
