@@ -56,6 +56,8 @@ def read_notice():
     write_data = []
     file_path = Config.ORIGIN_DATA + 'traindata-01.csv'
     f1 = open(Config.CN_DATA + 'traindata.json','a')
+    f2 = open(Config.CN_DATA + 'validata.json', 'a')
+    f3 = open(Config.CN_DATA + 'testdata.json', 'a')
     with open(file_path) as f:
         # 获取全部文本
         items = f.readlines()
@@ -97,8 +99,12 @@ def read_notice():
 
         write_data.append(temp_dict)
         print(tailword)
-    f1.write(json.dumps(write_data, ensure_ascii=False, indent=2))
-    f.close()
+    f1.write(json.dumps(write_data[:-40], ensure_ascii=False, indent=2))
+    f2.write(json.dumps(write_data[-40:-20], ensure_ascii=False, indent=2))
+    f3.write(json.dumps(write_data[:-20], ensure_ascii=False, indent=2))
+    f1.close()
+    f2.close()
+    f3.close()
 
 
 if __name__ == '__main__':

@@ -27,7 +27,7 @@ framework = nrekit.framework.re_framework(None, test_loader)
 
 
 class model(nrekit.framework.re_model):
-    encoder = "pcnn"
+    encoder = "rnn"
     selector = "att"
 
     def __init__(self, train_data_loader, batch_size, max_length=120):

@@ -2,6 +2,7 @@ import codecs
 import json
 from uuid import uuid1
 
+
 def txt2json_dict(readfile, writefile):
     f = codecs.open(readfile, 'r', 'utf-8')
     f2 = codecs.open(writefile, 'w', 'utf-8')
@@ -40,11 +41,8 @@ def txt2json_vec(readfile, writefile, fromline):
     f.close()
     f2.close()
 
-'''
-从3000篇财报中，根据关键字(客户、股票)抽取实体和关系，作为训练集
-1.
 
-'''
+
 def txt2json_data(readfile, writefile):
     f = codecs.open(readfile, 'r', 'utf-8')
     f2 = codecs.open(writefile, 'w', 'utf-8')
@@ -104,7 +102,7 @@ def txt2json_data(readfile, writefile):
     f2.close()
 
 
-txt2json_dict('./origindata/relation2id.txt', './data/cndata/rel2id.json')
-txt2json_vec('./origindata/vec.txt', './data/cndata/word_vec.json', 1)
-txt2json_data('./origindata/train.txt', './data/cndata/train.json')
-txt2json_data('./origindata/test.txt', './data/cndata/test.json')
+if __name__ == '__main__':
+
+    # txt2json_dict('./origindata/relation2id.txt', './data/cndata/rel2id.json')
+    pass

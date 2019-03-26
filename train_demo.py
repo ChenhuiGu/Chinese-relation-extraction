@@ -29,7 +29,7 @@ test_loader = nrekit.data_loader.json_file_data_loader(os.path.join(dataset_dir,
 framework = nrekit.framework.re_framework(train_loader, test_loader)
 
 class model(nrekit.framework.re_model): # model的定义
-    encoder = "pcnn"
+    encoder = "rnn"
     selector = "att"
 
     def __init__(self, train_data_loader, batch_size, max_length=120):
