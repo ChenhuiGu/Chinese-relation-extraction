@@ -101,7 +101,7 @@ def read_notice():
         print(tailword)
     f1.write(json.dumps(write_data[:-40], ensure_ascii=False, indent=2))
     f2.write(json.dumps(write_data[-40:-20], ensure_ascii=False, indent=2))
-    f3.write(json.dumps(write_data[:-20], ensure_ascii=False, indent=2))
+    f3.write(json.dumps(write_data[-20:], ensure_ascii=False, indent=2))
     f1.close()
     f2.close()
     f3.close()
