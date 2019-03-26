@@ -88,4 +88,5 @@ def baidu_segmentation(query):
 
 
 if __name__ == '__main__':
-    get_define_entity()
+    # get_define_entity()
+    print(id2filepath(1891489))

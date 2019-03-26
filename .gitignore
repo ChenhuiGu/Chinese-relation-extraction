@@ -14,4 +14,4 @@ log_sbatch
 *.sh
 sbatch*
 *.ipynb
-origindata
+

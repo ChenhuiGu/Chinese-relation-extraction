@@ -8,7 +8,6 @@ dataset_name = 'cndata'
 if len(sys.argv) > 1:
     dataset_name = sys.argv[1]
 dataset_dir = os.path.join('./data', dataset_name)
-print(dataset_dir)
 
 if not os.path.isdir(dataset_dir):
     raise Exception("[ERROR] Dataset dir %s doesn't exist!" % (dataset_dir))
