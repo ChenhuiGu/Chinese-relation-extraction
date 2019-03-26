@@ -6,7 +6,9 @@ import time
 from baidu_config import bd_client
 # base_dir = os.path.split(os.path.realpath(__file__))[0]
 from uuid import uuid1
-
+'''
+获取年报开头的实体
+'''
 
 def id2filepath(id):
     '''

@@ -5,7 +5,10 @@ from baidu_config import bd_client
 import re
 import os
 import Config
+'''
+利用关键词的方法获取训练集
 
+'''
 
 def get_file_path_list(root):
     '''得到root目录下的全部文件'''
