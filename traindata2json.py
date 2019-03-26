@@ -72,14 +72,14 @@ def read_notice():
             try:
                 with open(file2_path) as f:
                     content = f.read()
-                list = re.findall(r'.{50}%s.{50}' % tailword, content)
+                list = re.findall(r'\n*%s\n*' % tailword, content)
                 sentence = ','.join(list[1:])
                 content_cache[headword] = content
             except Exception:
                 print(traceback.format_exc())
         else:
             content = content_cache[headword]
-            list = re.findall(r'.{50}%s.{50}' % tailword, content)
+            list = re.findall(r'\n*%s\n*' % tailword, content)
             sentence = ','.join(list[1:])
 
         temp_dict["head"] = {
