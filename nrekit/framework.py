@@ -117,7 +117,7 @@ class re_framework:
               ckpt_dir='./checkpoint',
               summary_dir='./summary',
               test_result_dir='./test_result',
-              learning_rate=0.5,
+              learning_rate=0.1,
               max_epoch=60, # 迭代多少轮次
               pretrain_model=None,
               test_epoch=1,

@@ -32,7 +32,7 @@ class model(nrekit.framework.re_model): # model的定义
     encoder = "rnn"
     selector = "att"
 
-    def __init__(self, train_data_loader, batch_size, max_length=120):
+    def __init__(self, train_data_loader, batch_size, max_length=200):
         nrekit.framework.re_model.__init__(self, train_data_loader, batch_size, max_length=max_length)
 
         self.mask = tf.placeholder(dtype=tf.int32, shape=[None, max_length], name="mask")
