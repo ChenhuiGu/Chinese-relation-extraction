@@ -103,13 +103,16 @@ def txt2json_data(readfile, writefile):
 
 
 def remove_nan():
-    f = open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/traindata.json','w')
-    datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata_cp/traindata.json').read())
-    for data in datas:
-        if not data['sentence']:
-            print(data)
-            # datas.remove(data)
+    # f = open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/validata.json','w')
+    # datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata_cp/validata.json').read())
+    datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/testdata.json').read())
+    for i in range(1):
+        for data in datas:
+            if data['sentence'] == '':
+                print(data)
+                # datas.remove(data)
     # f.write(json.dumps(datas, ensure_ascii=False, indent=2))
+    # f.close
 
 if __name__ == '__main__':
 

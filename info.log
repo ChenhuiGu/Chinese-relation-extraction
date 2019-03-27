@@ -1,0 +1,15 @@
+2019-03-27 16:13:25.001 | DEBUG    | __main__:<module>:17 - this is debug
+2019-03-27 16:17:44.481 | DEBUG    | __main__:<module>:17 - this is debug,program,get back
+2019-03-27 16:19:40.093 | DEBUG    | __main__:<module>:17 - this is debug,program,get back
+2019-03-27 16:19:58.773 | DEBUG    | __main__:<module>:17 - this is debug,program,get back
+2019-03-27 16:19:58.773 | ERROR    | __main__:<module>:23 - An error has been caught in function '<module>', process 'MainProcess' (6173), thread 'MainThread' (4656457152):
+Traceback (most recent call last):
+
+> File "/Users/chenhuigu/Documents/GitHub/relat_extra/logging_test.py", line 23, in <module>
+    add()
+    └ <function add at 0x10a41c2f0>
+
+  File "/Users/chenhuigu/Documents/GitHub/relat_extra/logging_test.py", line 21, in add
+    return 3/0
+
+ZeroDivisionError: division by zero
