@@ -92,10 +92,10 @@ def read_notice():
             "word": tailword,
             "id": str(uuid1())
         }
-        if len(sentence)<120:
+        if len(sentence)<200:
             temp_dict["sentence"] = sentence
         else:
-            temp_dict["sentence"] = sentence[20:119]
+            temp_dict["sentence"] = sentence[:200]
         temp_dict["relation"] = relation
 
 
