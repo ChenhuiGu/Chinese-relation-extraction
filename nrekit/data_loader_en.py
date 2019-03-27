@@ -364,7 +364,7 @@ class json_file_data_loader(file_data_loader):
                 cur_pos = 0
                 pos1 = -1
                 pos2 = -1
-
+                j = 0
                 # pos1为head的开头词在句子中的索引位置，pos2为tail的起始词在句子中的索引位置
                 for j, word in enumerate(words):
                     if j < max_length:
@@ -383,8 +383,8 @@ class json_file_data_loader(file_data_loader):
 
 
                 # 对最大长度外的单词赋值为BLANK
-                for j in range(j + 1, max_length):
-                    cur_ref_data_word[j] = BLANK
+                for z in range(j + 1, max_length):
+                    cur_ref_data_word[z] = BLANK
                 
                 
                 self.data_length[i] = len(words) # 存储每个句子的长度，为mask做准备
