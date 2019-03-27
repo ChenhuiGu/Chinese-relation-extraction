@@ -102,7 +102,16 @@ def txt2json_data(readfile, writefile):
     f2.close()
 
 
+def remove_nan():
+    f = open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/traindata.json','w')
+    datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata_cp/traindata.json').read())
+    for data in datas:
+        if not data['sentence']:
+            print(data)
+            # datas.remove(data)
+    # f.write(json.dumps(datas, ensure_ascii=False, indent=2))
+
 if __name__ == '__main__':
 
     # txt2json_dict('./origindata/relation2id.txt', './data/cndata/rel2id.json')
-    pass
+    remove_nan()

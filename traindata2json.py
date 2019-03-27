@@ -92,14 +92,17 @@ def read_notice():
             "word": tailword,
             "id": str(uuid1())
         }
-
-        temp_dict["sentence"] = sentence
+        if len(sentence)<120:
+            temp_dict["sentence"] = sentence
+        else:
+            temp_dict["sentence"] = sentence[20:119]
         temp_dict["relation"] = relation
 
 
         write_data.append(temp_dict)
         print(tailword)
-    f1.write(json.dumps(write_data[:-40], ensure_ascii=False, indent=2))
+    print(company_id_dict.keys())
+    f1.write(json.dumps(write_data[:-60], ensure_ascii=False, indent=2))
     f2.write(json.dumps(write_data[-60:-10], ensure_ascii=False, indent=2))
     f3.write(json.dumps(write_data[-10:], ensure_ascii=False, indent=2))
     f1.close()
