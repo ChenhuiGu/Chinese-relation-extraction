@@ -113,8 +113,19 @@ def remove_nan():
                 # datas.remove(data)
     # f.write(json.dumps(datas, ensure_ascii=False, indent=2))
     # f.close
+import random
+def add_headword():
+    '''将2个实体都加入到句子中,位置随机(插入主体之中)/句子末尾'''
 
+    f = open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/validata.json','w')
+    datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata_cp3/validata.json').read())
+    for data in datas:
+        index = random.randint(0,len(data['sentence'])-1)
+        data['sentence'].insert(data['head']['word'])
+
+    f.write(json.dumps(datas, ensure_ascii=False, indent=2))
+    f.close
 if __name__ == '__main__':
 
-    # txt2json_dict('./origindata/relation2id.txt', './data/cndata/rel2id.json')
-    remove_nan()
+    # txt2json_dict('./origindata/relation2id.txt', './data/cndata/rel2id1.json')
+    add_headword()

@@ -19,7 +19,7 @@ if not os.path.isdir(dataset_dir):
 # todo 修改vec库名称
 test_loader = nrekit.data_loader.json_file_data_loader(os.path.join(dataset_dir, 'testdata.json'),
                                                        os.path.join(dataset_dir, 'sgns.financial.char'),
-                                                       os.path.join(dataset_dir, 'rel2id.json'), 
+                                                       os.path.join(dataset_dir, 'rel2id1.json'),
                                                        mode=nrekit.data_loader.json_file_data_loader.MODE_ENTPAIR_BAG,
                                                        shuffle=False)
 
@@ -100,7 +100,7 @@ auc, pred_result = framework.test(model, ckpt="./checkpoint/" + dataset_name + "
 
 # 加载id2entity 和id2rel的dictionary
 id2entity_file_name = os.path.join('_processed_data', 'test_id2entity.json')
-rel2id_file_name = os.path.join(dataset_dir, 'rel2id.json')
+rel2id_file_name = os.path.join(dataset_dir, 'rel2id1.json')
 
 id2entity = json.load(codecs.open(id2entity_file_name, "r", "utf-8"))
 rel2id = json.load(codecs.open(rel2id_file_name, "r", "utf-8"))

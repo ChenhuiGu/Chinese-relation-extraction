@@ -13,3 +13,15 @@ Traceback (most recent call last):
     return 3/0
 
 ZeroDivisionError: division by zero
+2019-03-27 19:30:25.026 | DEBUG    | __main__:<module>:17 - this is debug,program,get back
+2019-03-27 19:30:25.027 | ERROR    | __main__:<module>:23 - An error has been caught in function '<module>', process 'MainProcess' (7894), thread 'MainThread' (4592555456):
+Traceback (most recent call last):
+
+> File "/Users/chenhuigu/Documents/GitHub/relat_extra/logging_test.py", line 23, in <module>
+    add()
+    └ <function add at 0x1104d52f0>
+
+  File "/Users/chenhuigu/Documents/GitHub/relat_extra/logging_test.py", line 21, in add
+    return 3/0
+
+ZeroDivisionError: division by zero

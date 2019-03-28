@@ -260,13 +260,14 @@ class json_file_data_loader(file_data_loader):
             print("Finish loading")
             
             # Eliminate case sensitive
-            if not case_sensitive:
-                print("Elimiating case sensitive problem...")
-                for i in range(len(self.ori_data)):
-                    self.ori_data[i]['sentence'] = self.ori_data[i]['sentence'].lower()
-                    self.ori_data[i]['head']['word'] = self.ori_data[i]['head']['word'].lower()
-                    self.ori_data[i]['tail']['word'] = self.ori_data[i]['tail']['word'].lower()
-                print("Finish eliminating")
+            # 对汉语无意义
+            # if not case_sensitive:
+            #     print("Elimiating case sensitive problem...")
+            #     for i in range(len(self.ori_data)):
+            #         self.ori_data[i]['sentence'] = self.ori_data[i]['sentence'].lower()
+            #         self.ori_data[i]['head']['word'] = self.ori_data[i]['head']['word'].lower()
+            #         self.ori_data[i]['tail']['word'] = self.ori_data[i]['tail']['word'].lower()
+            #     print("Finish eliminating")
 
             # Sort data by entities and relations
             print("Sort data...")
@@ -291,17 +292,17 @@ class json_file_data_loader(file_data_loader):
             # 枚举，index and dict
             for cur_id, word in enumerate(self.ori_word_vec):
                 w = word['word']
-                if not case_sensitive:
-                    w = w.lower()
+                # if not case_sensitive:
+                #     w = w.lower()
                 self.word2id[w] = cur_id # 将词对应于index的id
-                self.word_vec_mat[cur_id, :] = word['vec'] #完全由词向量组成2维数组,word--id--index
+                self.word_vec_mat[cur_id, :] = word['vec'] #完全由词向量组成2维数组,
 
             # 将上文对应初始化的词向量更新为vec字典的向量, UNK和BLANK并没有为其赋值词向量
 
             self.word2id['UNK'] = UNK
             self.word2id['BLANK'] = BLANK
             print("Finish building") # 上面完成dict的构建
-            
+            # 将词与id通过字典联系起来，word--id--vec
 
             # Pre-process data
             print("Pre-processing data...")
