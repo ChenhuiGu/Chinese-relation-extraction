@@ -120,9 +120,7 @@ def add_headword():
     f = open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata/validata.json','w')
     datas = json.loads(open('/Users/chenhuigu/Documents/GitHub/relat_extra/data/cndata_cp3/validata.json').read())
     for data in datas:
-        index = random.randint(0,len(data['sentence'])-1)
-        data['sentence'].insert(data['head']['word'])
-
+        data['sentence'] = data['sentence'] + data['head']['word']
     f.write(json.dumps(datas, ensure_ascii=False, indent=2))
     f.close
 if __name__ == '__main__':

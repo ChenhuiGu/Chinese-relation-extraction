@@ -261,13 +261,13 @@ class json_file_data_loader(file_data_loader):
             
             # Eliminate case sensitive
             # 对汉语无意义
-            # if not case_sensitive:
-            #     print("Elimiating case sensitive problem...")
-            #     for i in range(len(self.ori_data)):
-            #         self.ori_data[i]['sentence'] = self.ori_data[i]['sentence'].lower()
-            #         self.ori_data[i]['head']['word'] = self.ori_data[i]['head']['word'].lower()
-            #         self.ori_data[i]['tail']['word'] = self.ori_data[i]['tail']['word'].lower()
-            #     print("Finish eliminating")
+            if not case_sensitive:
+                print("Elimiating case sensitive problem...")
+                for i in range(len(self.ori_data)):
+                    self.ori_data[i]['sentence'] = self.ori_data[i]['sentence'].lower()
+                    self.ori_data[i]['head']['word'] = self.ori_data[i]['head']['word'].lower()
+                    self.ori_data[i]['tail']['word'] = self.ori_data[i]['tail']['word'].lower()
+                print("Finish eliminating")
 
             # Sort data by entities and relations
             print("Sort data...")
@@ -292,8 +292,8 @@ class json_file_data_loader(file_data_loader):
             # 枚举，index and dict
             for cur_id, word in enumerate(self.ori_word_vec):
                 w = word['word']
-                # if not case_sensitive:
-                #     w = w.lower()
+                if not case_sensitive:
+                    w = w.lower()
                 self.word2id[w] = cur_id # 将词对应于index的id
                 self.word_vec_mat[cur_id, :] = word['vec'] #完全由词向量组成2维数组,
 
@@ -375,8 +375,8 @@ class json_file_data_loader(file_data_loader):
                     
 
                 # 对最大长度外的单词赋值为BLANK
-                for j in range(j + 1, max_length):
-                    cur_ref_data_word[j] = BLANK
+                for z in range(j + 1, max_length):
+                    cur_ref_data_word[z] = BLANK
                 
                 self.data_length[i] = len(sentence)  # 存储每个句子的长度，为mask做准备
 
